@@ -20,15 +20,6 @@ in {
   nix = {
     settings.auto-optimise-store = true;
 
-    # delete old generations automatically
-    # use nh instead
-   /* gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 2d";
-    };
-    */
-
     registry.nixpkgs.flake = inputs.nixpkgs;
 
     extraOptions = ''
@@ -118,6 +109,7 @@ in {
       apps
       */
       firefox
+      brave
       spotify
 
       /*
@@ -140,13 +132,16 @@ in {
       /*
       dev
       */
+      zulu17 # jdk
       inputs.alejandra.defaultPackage.${system} # nix formatter
       nil # .nix lsp
       nodejs_20 # node lts
+      yarn # node package manager
       eslint_d # eslint
       prettierd # prettier
       gcc
       dotnet-sdk_8
+      jetbrains.rider
       cargo # rust
       lazygit # git tui
       androidStudioPackages.dev # needs to be dev right now (2024.2.2 has wayland support)

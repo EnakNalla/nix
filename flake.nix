@@ -17,6 +17,12 @@
       url = "github:kamadorueda/alejandra/3.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    darwin = {
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
   outputs = {
@@ -32,6 +38,14 @@
   in {
     nixosConfigurations = (
       import ./hosts {
+        inherit (nixpkgs) lib;
+        inherit vars inputs nixpkgs;
+      }
+    );
+
+    darwinConfigurations = (
+      import ./darwin {
+        inherit (nixpkgs) lib;
         inherit vars inputs nixpkgs;
       }
     );
